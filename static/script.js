@@ -27,6 +27,8 @@ form.addEventListener("submit", function (event) {
 
 
     graphsContainer.style.display = "none";
+    graphImg.src = "";
+    metricsImg.src = "";
     regressionImgUrl = "";
     metricsImgUrl = "";
     hideError();
@@ -104,6 +106,10 @@ form.addEventListener("submit", function (event) {
 
             regressionImgUrl = data.regression_image;
             metricsImgUrl = data.metrics_image;
+
+            // Target the src attribute of <img> tags immediately
+            graphImg.src = regressionImgUrl;
+            metricsImg.src = metricsImgUrl;
         })
         .catch(err => {
             showError(err.message);
@@ -112,9 +118,7 @@ form.addEventListener("submit", function (event) {
 });
 
 visualizeBtn.addEventListener("click", function () {
-    if (regressionImgUrl && metricsImgUrl) {
-        graphImg.src = regressionImgUrl;
-        metricsImg.src = metricsImgUrl;
+    if (graphImg.src && metricsImg.src) {
         graphsContainer.style.display = "block";
     } else {
         alert("Please calculate regression first before visualizing!");
