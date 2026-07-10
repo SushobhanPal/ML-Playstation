@@ -1,3 +1,5 @@
+import io
+import base64
 import numpy as np
 import matplotlib.pyplot as plt
 from flask import Flask, render_template, request, jsonify
@@ -99,7 +101,12 @@ def predict():
     plt.title("Linear Regression")
 
     plt.legend()
-    plt.savefig("static/regression.png")
+    
+    # Save regression plot to a memory buffer and convert to base64
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    buf.seek(0)
+    regression_base64 = base64.b64encode(buf.read()).decode("utf-8")
     plt.close()
 
     # Generate metrics scatter plot
@@ -116,7 +123,12 @@ def predict():
     plt.title("Model Metrics Comparison")
     plt.grid(True, linestyle="--", alpha=0.5)
     plt.tight_layout()
-    plt.savefig("static/metrics.png")
+    
+    # Save metrics plot to a memory buffer and convert to base64
+    buf_metrics = io.BytesIO()
+    plt.savefig(buf_metrics, format="png")
+    buf_metrics.seek(0)
+    metrics_base64 = base64.b64encode(buf_metrics.read()).decode("utf-8")
     plt.close()
 
     return jsonify({
@@ -135,8 +147,8 @@ def predict():
 
         "r2": round(float(r2), 4),
 
-        "regression_image": "/static/regression.png",
-        "metrics_image": "/static/metrics.png"
+        "regression_image": f"data:image/png;base64,{regression_base64}",
+        "metrics_image": f"data:image/png;base64,{metrics_base64}"
 
     })
 

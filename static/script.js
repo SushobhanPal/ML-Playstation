@@ -113,9 +113,8 @@ form.addEventListener("submit", function (event) {
 
 visualizeBtn.addEventListener("click", function () {
     if (regressionImgUrl && metricsImgUrl) {
-        const timestamp = new Date().getTime();
-        graphImg.src = regressionImgUrl + "?t=" + timestamp;
-        metricsImg.src = metricsImgUrl + "?t=" + timestamp;
+        graphImg.src = regressionImgUrl;
+        metricsImg.src = metricsImgUrl;
         graphsContainer.style.display = "block";
     } else {
         alert("Please calculate regression first before visualizing!");
