@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linear Regression Calculator - ML Playstation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='linear_regression.css') }}">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <div class="logo" onclick="window.location.href='/'">
+            <span class="logo-icon">🎮</span> ML Playstation
+        </div>
+        <div class="page-title-badge">Linear Regression</div>
+        <button class="hamburger-btn" id="menuToggle" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Slide-out Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Algorithms</h3>
+            <button class="close-btn" id="menuClose" aria-label="Close Menu">&times;</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/" class="nav-item">
+                <span class="nav-icon">🏠</span> Home
+            </a>
+            <a href="/linear-regression" class="nav-item active">
+                <span class="nav-icon">📈</span> Linear Regression
+            </a>
+            <a href="/mlr" class="nav-item">
+                <span class="nav-icon">📊</span> Multiple Linear Regression
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>Made for Learning Purpose</p>
+        </div>
+    </div>
+    <!-- Blur overlay when sidebar is active -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Home</a>
+        </div>
+
+        <div class="calculator-grid">
+            <!-- Left Side: Inputs -->
+            <div class="control-panel">
+                <h2>Model Configuration</h2>
+                <p class="panel-subtitle">Enter comma-separated values of matching length to train the linear model.</p>
+                
+                <div id="errorBox" class="error-box" style="display: none;"></div>
+
+                <form id="regressionForm">
+                    <div class="input-group">
+                        <label for="xValues">
+                            <strong>Independent Variable (X Values)</strong>
+                            <span class="tooltip-info">i.e. Predictor variables, e.g. age, size, hours</span>
+                        </label>
+                        <input type="text" id="xValues" placeholder="e.g. 1, 2, 3, 4, 5" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="yValues">
+                            <strong>Dependent Variable (Y Values)</strong>
+                            <span class="tooltip-info">i.e. Target values to predict, e.g. price, test score</span>
+                        </label>
+                        <input type="text" id="yValues" placeholder="e.g. 2, 4, 5, 4, 5" required>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>⚡</span> Fit Linear Model
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Side: Outputs & Metrics -->
+            <div class="results-panel">
+                <h2>Regression Metrics</h2>
+                <p class="panel-subtitle">Calculated parameters and goodness-of-fit metrics.</p>
+
+                <div class="equation-box">
+                    <span class="eq-label">Best Fit Equation</span>
+                    <div class="eq-display" id="equation">Y = mx + c</div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-val" id="r2">-</span>
+                        <span class="metric-label">R² Score (Variance Explained)</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-val" id="mae">-</span>
+                        <span class="metric-label">MAE (Mean Absolute Error)</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-val" id="mse">-</span>
+                        <span class="metric-label">MSE (Mean Squared Error)</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-val" id="rmse">-</span>
+                        <span class="metric-label">RMSE (Root Mean Sq. Error)</span>
+                    </div>
+                </div>
+
+                <div class="visualize-action">
+                    <button type="button" id="visualizeBtn" class="visualize-btn" disabled>
+                        <span>👁️</span> Render Visualizations
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graphs Section -->
+        <section class="graphs-section" id="graphsContainer" style="display: none;">
+            <div class="graph-card">
+                <h3>Regression Plot</h3>
+                <p class="graph-desc">Visualizes the best fit line relative to your actual dataset points.</p>
+                <div class="image-wrapper">
+                    <img id="graph" src="" alt="Linear Regression Line plot">
+                </div>
+            </div>
+
+            <div class="graph-card">
+                <h3>Model Metrics comparison</h3>
+                <p class="graph-desc">Compares standard errors (MSE, MAE, RMSE) and the coefficient of determination (R²).</p>
+                <div class="image-wrapper">
+                    <img id="metricsGraph" src="" alt="Metrics summary bar plot">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 ML Playstation. Designed for AML Lab.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='linear_regression.js') }}?v=3"></script>
+</body>
+</html>

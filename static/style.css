@@ -1,63 +1,10 @@
-/* General Page Styling */
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 40px;
-    background-color: #f4f4f4;
-}
-
-/* Main Container */
-.container {
-    width: 700px;
-    margin: auto;
-    background-color: white;
-    padding: 25px;
-    border-radius: 8px;
-}
-
-/* Heading */
-h1 {
-    text-align: center;
-}
-
-/* Labels */
-label {
+/* DEPRECATED: This stylesheet has been replaced by landing.css, linear_regression.css, and mlr.css. */
+body::before {
+    content: "DEPRECATED: Please use the page-specific stylesheets.";
     display: block;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-/* Input Boxes */
-input {
-    width: 100%;
+    background: #f43f5e;
+    color: white;
     padding: 10px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-/* Button */
-button {
-    margin-top: 20px;
-    padding: 10px 18px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-/* Result Section */
-#result {
-    margin-top: 30px;
-}
-
-#equation {
-    color: blue;
+    text-align: center;
     font-weight: bold;
-}
-
-/* Graph */
-#graph,
-#metricsGraph {
-    margin-top: 20px;
-    max-width: 100%;
-    border: 1px solid #ccc;
-    display: block;
 }

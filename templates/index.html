@@ -1,81 +1,24 @@
+<!-- DEPRECATED: This file has been replaced by landing.html and linear_regression.html as part of the advanced modular rewrite. -->
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linear Regression</title>
-    <link rel="stylesheet" href="{{url_for('static',filename = 'style.css')}}">
+    <title>Deprecated</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 40px;
+            text-align: center;
+        }
+        a {
+            color: #06b6d4;
+        }
+    </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Linear Regression Calculator</h1>
-        <hr>
-
-        <h2>Input Data</h2>
-        <div id="errorBox"
-            style="display: none; color: #721c24; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 12px; border-radius: 4px; margin-bottom: 15px; font-weight: bold;">
-        </div>
-        <form id="regressionForm">
-            <label for="xValues"><strong>X Values</strong></label>
-            <br>
-            <input type="text" id="xValues" placeholder="Example: 1,2,3,4,5" required>
-            <br><br>
-            <label for="yValues"><strong> Y values</strong></label>
-            <br>
-            <input type="text" id="yValues" placeholder="Example 2,4,5,4,5" required>
-
-            <br><br>
-
-            <button type="submit">
-                Calculate Regression
-            </button>
-        </form>
-        <hr>
-
-        <h2>Results</h2>
-        <p>
-            <strong>Equation:</strong>
-            <span id="equation">Y = mx + c</span>
-        </p>
-        <p>
-            <strong>MAE:</strong>
-            <span id="mae"></span>
-        </p>
-        <p>
-            <strong>MSE:</strong>
-            <span id="mse"></span>
-        </p>
-
-        <p>
-            <strong>RMSE:</strong>
-            <span id="rmse"></span>
-        </p>
-
-        <p>
-            <strong>R² Score:</strong>
-            <span id="r2"></span>
-        </p>
-
-        <hr>
-
-        <button type="button" id="visualizeBtn">Visualize</button>
-
-        <div id="graphsContainer" style="display: none; margin-top: 20px;">
-            <h2>Regression Plot</h2>
-            <img id="graph" src="" alt="Regression Line" width="700">
-
-            <h2>Metrics Scatter Plot</h2>
-            <img id="metricsGraph" src="" alt="Metrics Scatter Plot" width="700">
-        </div>
-
-        <script src="{{url_for('static',filename='script.js')}}?v=2"></script>
-
-    </div>
-
-
-
+    <h1>This file is deprecated</h1>
+    <p>Please visit the new homepage at <a href="/">/</a>.</p>
 </body>
-
 </html>

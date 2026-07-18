@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Linear Regression - ML Playstation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mlr.css') }}">
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <div class="logo" onclick="window.location.href='/'">
+            <span class="logo-icon">🎮</span> ML Playstation
+        </div>
+        <div class="page-title-badge">Multiple Regression</div>
+        <button class="hamburger-btn" id="menuToggle" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Slide-out Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Algorithms</h3>
+            <button class="close-btn" id="menuClose" aria-label="Close Menu">&times;</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/" class="nav-item">
+                <span class="nav-icon">🏠</span> Home
+            </a>
+            <a href="/linear-regression" class="nav-item">
+                <span class="nav-icon">📈</span> Linear Regression
+            </a>
+            <a href="/mlr" class="nav-item active">
+                <span class="nav-icon">📊</span> Multiple Linear Regression
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>Made for Learning Purpose</p>
+        </div>
+    </div>
+    <!-- Blur overlay when sidebar is active -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <div class="back-link">
+            <a href="/">&larr; Back to Home</a>
+        </div>
+
+        <div class="calculator-grid">
+            <!-- Left Side: Inputs -->
+            <div class="control-panel">
+                <h2>Model Configuration</h2>
+                <p class="panel-subtitle">Enter target (Y) values and add independent (X) features. All inputs must be comma-separated lists of matching length.</p>
+                
+                <div id="errorBox" class="error-box" style="display: none;"></div>
+
+                <form id="mlrForm">
+                    <!-- Target variable input -->
+                    <div class="input-group">
+                        <label for="yValues">
+                            <strong>Target Variable (Y Values)</strong>
+                            <span class="tooltip-info">Dependent variable to predict, e.g. house prices</span>
+                        </label>
+                        <input type="text" id="yValues" placeholder="e.g. 10, 12, 15, 18, 20" required>
+                    </div>
+
+                    <!-- Independent variables container -->
+                    <div class="features-section">
+                        <div class="features-header">
+                            <strong>Independent Features (X Values)</strong>
+                            <span class="tooltip-info">Add as many features as your model requires</span>
+                        </div>
+                        
+                        <div class="features-wrapper" id="featuresWrapper">
+                            <!-- Feature X1 -->
+                            <div class="feature-item" data-index="1">
+                                <div class="feature-label-row">
+                                    <label for="xValue1">Feature X1 Values</label>
+                                </div>
+                                <div class="feature-input-row">
+                                    <input type="text" id="xValue1" class="x-feature-input" placeholder="e.g. 1, 2, 3, 4, 5" required>
+                                </div>
+                            </div>
+                            
+                            <!-- Feature X2 -->
+                            <div class="feature-item" data-index="2">
+                                <div class="feature-label-row">
+                                    <label for="xValue2">Feature X2 Values</label>
+                                    <button type="button" class="remove-feature-btn" onclick="removeFeatureElement(2)">&times; Remove</button>
+                                </div>
+                                <div class="feature-input-row">
+                                    <input type="text" id="xValue2" class="x-feature-input" placeholder="e.g. 2, 3, 5, 7, 8" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" id="addFeatureBtn" class="add-feature-btn">
+                            <span>+</span> Add Feature Column
+                        </button>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <span>⚡</span> Fit Multiple Regression Model
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right Side: Outputs & Metrics -->
+            <div class="results-panel">
+                <h2>Regression Metrics & Weights</h2>
+                <p class="panel-subtitle">Calculated parameters, variable coefficients, and model performance metrics.</p>
+
+                <div class="equation-box">
+                    <span class="eq-label">Best Fit Equation</span>
+                    <div class="eq-display" id="equation">Y = &beta;₀ + &beta;₁X₁ + &beta;₂X₂ + ...</div>
+                </div>
+
+                <!-- Coefficients Table -->
+                <div class="coefficients-box">
+                    <span class="box-title">Model Coefficients</span>
+                    <div class="table-wrapper">
+                        <table class="coef-table">
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Estimated Value (Weight)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="coefficientsBody">
+                                <tr>
+                                    <td colspan="2" class="no-data">Fit the model to view weights</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-val" id="r2">-</span>
+                        <span class="metric-label">R² Score (Variance Explained)</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-val" id="mae">-</span>
+                        <span class="metric-label">MAE (Mean Absolute Error)</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-val" id="mse">-</span>
+                        <span class="metric-label">MSE (Mean Squared Error)</span>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-val" id="rmse">-</span>
+                        <span class="metric-label">RMSE (Root Mean Sq. Error)</span>
+                    </div>
+                </div>
+
+                <div class="visualize-action">
+                    <button type="button" id="visualizeBtn" class="visualize-btn" disabled>
+                        <span>👁️</span> Render Visualizations
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Graphs Section -->
+        <section class="graphs-section" id="graphsContainer" style="display: none;">
+            <div class="graph-card">
+                <h3>Actual vs Predicted</h3>
+                <p class="graph-desc">Compares the ground truth Y values with model predictions. Perfect prediction aligns with the diagonal line.</p>
+                <div class="image-wrapper">
+                    <img id="graph" src="" alt="Actual vs Predicted scatter plot">
+                </div>
+            </div>
+
+            <div class="graph-card">
+                <h3>Model Metrics Comparison</h3>
+                <p class="graph-desc">A bar chart showing error sizes and regression fit quality metrics.</p>
+                <div class="image-wrapper">
+                    <img id="metricsGraph" src="" alt="Evaluation metrics bar plot">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 ML Playstation. Designed for AML Lab.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='mlr.js') }}?v=3"></script>
+</body>
+</html>

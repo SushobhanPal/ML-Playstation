@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Playstation - Interactive Machine Learning Playground</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='landing.css') }}">
+</head>
+
+<body>
+
+    <!-- Header & Navigation -->
+    <header class="navbar">
+        <div class="logo">
+            <span class="logo-icon">🎮</span> ML Playstation
+        </div>
+        <button class="hamburger-btn" id="menuToggle" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Slide-out Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Algorithms</h3>
+            <button class="close-btn" id="menuClose" aria-label="Close Menu">&times;</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="/" class="nav-item active">
+                <span class="nav-icon">🏠</span> Home
+            </a>
+            <a href="/linear-regression" class="nav-item">
+                <span class="nav-icon">📈</span> Linear Regression
+            </a>
+            <a href="/mlr" class="nav-item">
+                <span class="nav-icon">📊</span> Multiple Linear Regression
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>Made for Learning Purpose</p>
+        </div>
+    </div>
+    <!-- Blur overlay when sidebar is active -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Main Container -->
+    <main class="main-container">
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Welcome to the <span class="gradient-text">ML Playstation</span></h1>
+            <p class="hero-subtitle">
+                An interactive playground designed to help you visualize, test, and master machine learning algorithms
+                step-by-step.
+            </p>
+        </section>
+
+        <!-- Models Showcase Grid -->
+        <section class="grid-section">
+            <h2 class="section-title">Select an Algorithm</h2>
+            <div class="models-grid">
+
+                <!-- Linear Regression -->
+                <div class="model-card">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon">📈</div>
+                        <h3 class="card-title">Linear Regression</h3>
+                        <p class="card-description">
+                            Fit a straight line to find relationships between a target and a single predictor variable.
+                            Perfect for understanding the fundamentals of curve-fitting.
+                        </p>
+                        <a href="/linear-regression" class="card-btn">Launch Model &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Multiple Linear Regression -->
+                <div class="model-card">
+                    <div class="card-glow"></div>
+                    <div class="card-content">
+                        <div class="card-icon">📊</div>
+                        <h3 class="card-title">Multiple Linear Regression</h3>
+                        <p class="card-description">
+                            Predict continuous target values using multiple independent features. Dynamically add
+                            features to see how weights adapt and fit the multi-dimensional space.
+                        </p>
+                        <a href="/mlr" class="card-btn">Launch Model &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Coming Soon: Logistic Regression -->
+                <div class="model-card disabled">
+                    <div class="card-content">
+                        <div class="badge">Future Launch</div>
+                        <div class="card-icon">🎯</div>
+                        <h3 class="card-title">Logistic Regression</h3>
+                        <p class="card-description">
+                            Perform binary classification tasks by mapping inputs to probabilities between 0 and 1.
+                            Coming soon to the playstation!
+                        </p>
+                        <button class="card-btn locked" disabled>Locked</button>
+                    </div>
+                </div>
+
+                <!-- Coming Soon: Decision Tree -->
+                <div class="model-card disabled">
+                    <div class="card-content">
+                        <div class="badge">Future Launch</div>
+                        <div class="card-icon">🌿</div>
+                        <h3 class="card-title">Decision Tree Classifier</h3>
+                        <p class="card-description">
+                            Split data step-by-step based on feature questions. Explore visual nodes, entropy, and
+                            information gain.
+                        </p>
+                        <button class="card-btn locked" disabled>Locked</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 ML Playstation. All rights reserved. Designed for AML Lab.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='landing.js') }}"></script>
+</body>
+
+</html>
